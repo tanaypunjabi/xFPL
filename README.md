@@ -72,7 +72,7 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
 
 ## Technologies Used
 
-- **Programming Language:** Python
+- **Programming Language:** Python (3.10.14)
 - **Libraries:** Scikit-learn, TensorFlow (Machine Learning), Pandas, NumPy (Data Manipulation), Matplotlib, Seaborn (Visualization)
 - **Data Source:** Historical FPL data from GitHub
 
