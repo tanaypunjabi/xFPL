@@ -6,10 +6,10 @@ This is the list of tasks to be completed for the **xFPL** project. The tasks ar
 
 ## 1. Data Collection & Preprocessing
 - [x] Identify and download historical FPL data from [vaastav/Fantasy-Premier-League](https://github.com/vaastav/Fantasy-Premier-League)
-- [ *in progress* ] Write ETL scripts to load raw data into the system
-- [ *in progress* ] Clean and normalize player data (handle missing values, standardize formats)
+- [-] Write ETL scripts to load raw data into the system
+- [-] Clean and normalize player data (handle missing values, standardize formats)
 <!-- - [ ] Extract and preprocess fixture data for upcoming gameweeks -->
-- [ *in progress* ] Engineer key features from raw data (e.g., average points, fixture difficulty)
+- [-] Engineer key features from raw data (e.g., average points, fixture difficulty)
 <!-- - [ ] Integrate external football data (optional: xG, xA, etc.) -->
 
 ## 2. Model Development
@@ -22,7 +22,7 @@ This is the list of tasks to be completed for the **xFPL** project. The tasks ar
 - [ ] Optimize models based on evaluation results
 
 ## 3. Recommendation System
-- [ *in progress* ] Outline/Finalize system functionalities
+- [-] Outline/Finalize system functionalities
 - [ ] Implement logic to generate transfer and captaincy recommendations
 - [ ] Test recommendation logic with historical data
 - [ ] Implement functionality to update recommendations based on real-time data
