@@ -23,15 +23,15 @@ This is the list of tasks to be completed for the **xFPL** project. The tasks ar
 
 ## 3. Recommendation System
 - [-] Outline/Finalize system functionalities
-- [ ] Implement logic to generate transfer and captaincy recommendations
+- [-] Implement logic to generate transfer and captaincy recommendations
 - [ ] Test recommendation logic with historical data
 - [ ] Implement functionality to update recommendations based on real-time data
 - [ ] Add logic for bench and squad rotation suggestions
 
 ## 4. Frontend Integration
-- [ ] Design basic UI to display player recommendations
+- [-] Design basic UI to display player recommendations
 <!-- - [ ] Implement interactive frontend (React, Flask, or other technology) -->
-- [ ] Integrate model outputs with frontend to provide real-time recommendations
+- [-] Integrate model outputs with frontend to provide real-time recommendations
 - [ ] Test frontend with multiple scenarios
 
 ## 5. Testing & Evaluation
