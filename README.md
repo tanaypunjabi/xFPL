@@ -1,6 +1,12 @@
 <!-- # DL_xFPL_tp275_zh94 -->
 # xFPL: Automated Fantasy Premier League (FPL) Strategic Advisor
 
+## DEMO SCRIPT (for first demo)
+- Tanay will demonstrate how we processed our data, and explain the recommendation logic
+- Anthony will demonstrate how the data is imported, and how our interactive user interface works
+- The demo will involve going through ```notebooks/01-data-preprocessing.ipynb``` and ```notebooks/demo1.ipynb```, as well as ```main.py```
+- The TA should be able to run ```main.py```, and upon entering a valid FPL team ID (anything from 1 to 999999 are generally valid, each representing a different team), see different recommendations for each team. (The script will exit with a custom error message for invalid team IDs)
+
 ## Project Overview
 
 xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), designed to help FPL managers make better decisions about team selection, transfers, and captaincy picks. Utilizing machine learning techniques such as **supervised learning** and **data mining**, xFPL predicts player performance and offers weekly recommendations.
@@ -22,7 +28,7 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
   - **Offline Simulation:** Tests predictions on historical FPL data to benchmark against traditional methods.
   - **Real-time Testing:** Applies recommendations to an actual FPL team, comparing performance with other FPL tools and human experts.
 
-## Project Timeline
+<!-- ## Project Timeline
 
 | Week  | Date           | Tasks                                         |
 |-------|----------------|-----------------------------------------------|
@@ -33,7 +39,7 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
 | 6     | 11/4 - 11/8    | Refine models                                 |
 | 7     | 11/11 - 11/15  | Stage 2 testing, FPL manager feedback         |
 | 8     | 11/18 - 11/22  | Demo preparation, finalize presentation       |
-| 9-10  | 11/25 - 12/6   | Final clean-up, write-up                      |
+| 9-10  | 11/25 - 12/6   | Final clean-up, write-up                      | -->
 
 <!-- ## Installation
 
