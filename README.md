@@ -13,16 +13,16 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
 
 ### Key Features
 - **Player Recommendations:** Get personalized player transfer and captaincy suggestions based on data-driven analysis.
-- **Predictive Models:** Uses historical player data to forecast expected points, clean sheets, and goal involvement for the upcoming game weeks.
+- **Predictive Models:** Uses historical player data to forecast expected points for the upcoming game weeks.
 - **Continuous Updates:** Recommendations evolve with real-time data, ensuring relevance throughout the FPL season.
 
 ## Project Components
 
-- **Supervised Learning Models:**
-  - **Regression Models:** Predict continuous outcomes such as expected player points.
-  - **Classification Models:** Forecast binary outcomes like clean sheets or goal likelihood.
+- **Supervised Learning Model:**
+  - **Regression Model (XGBoost):** Predict continuous outcome: expected player points.
+  <!-- - **Classification Models:** Forecast binary outcomes like clean sheets or goal likelihood. -->
   
-- **Data Mining:** Extracts and analyzes historical player and team statistics to uncover performance patterns, enabling more accurate predictions.
+- **Data Mining & Engineering:** Extracts and analyzes historical player and team statistics to uncover performance patterns, enabling more accurate predictions.
   
 - **Evaluation:** 
   - **Offline Simulation:** Tests predictions on historical FPL data to benchmark against traditional methods.
@@ -79,7 +79,7 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
 ## Technologies Used
 
 - **Programming Language:** Python (3.10.14)
-- **Libraries:** Scikit-learn, TensorFlow (Machine Learning), Pandas, NumPy (Data Manipulation), Matplotlib, Seaborn (Visualization)
+- **Libraries:** Scikit-learn, xgboost, Pandas, NumPy (Data Manipulation), Matplotlib, Seaborn (Visualization)
 - **Data Source:** Historical FPL data from GitHub
 
 ## Evaluation
