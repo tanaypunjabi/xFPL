@@ -18,11 +18,11 @@ xFPL is a data-driven strategic advisor for Fantasy Premier League (FPL), design
 
 ## Project Components
 
-- **Supervised Learning Model:**
-  - **Regression Model (XGBoost):** Predict continuous outcome: expected player points.
-  <!-- - **Classification Models:** Forecast binary outcomes like clean sheets or goal likelihood. -->
-  
 - **Data Mining & Engineering:** Extracts and analyzes historical player and team statistics to uncover performance patterns, enabling more accurate predictions.
+
+- **Supervised Learning Model:**
+  - **Regression Model (XGBoost):** Predict continuous outcome (expected player points).
+  <!-- - **Classification Models:** Forecast binary outcomes like clean sheets or goal likelihood. -->
   
 - **Evaluation:** 
   - **Offline Simulation:** Tests predictions on historical FPL data to benchmark against traditional methods.
