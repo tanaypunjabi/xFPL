@@ -52,29 +52,71 @@ def recommend_transfers(user_team_list, budget):
         str: A message indicating the available budget and recommended transfers.
     """
     user_players_table = get_user_team_table(user_team_list)
+    print(user_team_list)
+    print(budget)
     user_team_data = user_players_table[['id', 'element_type', 'now_cost']].set_index('id').T.to_dict()
 
-    recommendations = PROCESSED_PLAYERS_TABLE.sort_values(by='value', ascending=False)[:10]
+    # recommendations = PROCESSED_PLAYERS_TABLE.sort_values(by='value', ascending=False)[:10]
+    model_predictions = pd.read_csv('notebooks/misc/2425gw10_model_preds.csv')
+    # model_predictions = model_predictions[['player_id', 'model_pred']]
+
+    # Merge predictions with processed players table
+    # recommendations = pd.merge(PROCESSED_PLAYERS_TABLE, model_predictions, on='player_id')
+    recommendations = model_predictions.copy()
+    recommendations = recommendations.sort_values(by='model_pred', ascending=False)
+
     recommended_transfers = []
 
     for _, recommended_player in recommendations.iterrows():
-        if recommended_player['id'] not in user_team_list:
+        if recommended_player['player_id'] not in user_team_list:
             for user_player, user_player_data in user_team_data.items():
-                if (recommended_player['element_type'] == user_player_data['element_type'] and 
-                    (user_player_data['now_cost'] + budget) >= recommended_player['now_cost']):
+                if (recommended_player['position'] == user_player_data['element_type'] and 
+                    (user_player_data['now_cost'] + budget) >= recommended_player['value']):
+                    
+                    expected_points_diff = recommended_player['model_pred'] - model_predictions.loc[model_predictions['player_id'] == user_player, 'model_pred'].values[0]
+                    
                     recommended_transfers.append(
                         {
                             'out': PLAYER_ID_TO_NAME_DICT[user_player]['full_name'],
                             'in': recommended_player['full_name'],
-                            'position': recommended_player['element_type'],
+                            'position': recommended_player['position'],
+                            'expected_points_diff': expected_points_diff
                         }
                     )
                     break
-    
+
+    # Sort transfers by descending order of expected points difference
+    recommended_transfers = sorted(recommended_transfers, key=lambda x: x['expected_points_diff'], reverse=True)[:5]
+
+    diff_exp_points = []
     print(f'You have ${budget/10}m in the bank currently.')
     print('Your recommended transfers are: ')
     for rec in recommended_transfers:
         print(f'Transfer {rec["out"]} out for {rec["in"]} (Position: {rec["position"]})')
+        diff_exp_points.append(rec['expected_points_diff'])
+    
+    return diff_exp_points
+   
+    # recommended_transfers = []
+
+    # for _, recommended_player in recommendations.iterrows():
+    #     if recommended_player['id'] not in user_team_list:
+    #         for user_player, user_player_data in user_team_data.items():
+    #             if (recommended_player['element_type'] == user_player_data['element_type'] and 
+    #                 (user_player_data['now_cost'] + budget) >= recommended_player['now_cost']):
+    #                 recommended_transfers.append(
+    #                     {
+    #                         'out': PLAYER_ID_TO_NAME_DICT[user_player]['full_name'],
+    #                         'in': recommended_player['full_name'],
+    #                         'position': recommended_player['element_type'],
+    #                     }
+    #                 )
+    #                 break
+    
+    # print(f'You have ${budget/10}m in the bank currently.')
+    # print('Your recommended transfers are: ')
+    # for rec in recommended_transfers:
+        # print(f'Transfer {rec["out"]} out for {rec["in"]} (Position: {rec["position"]})')
 
 ### CAPTAINCY RECOMMENDATION ###
 def recommend_captain(user_team_list):
@@ -125,5 +167,34 @@ def main():
     print('\n')
     print('Thanks for using xFPL!')
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+
+
+# ### TESTS ###
+
+import unittest
+class TestRecommendTransfers(unittest.TestCase):
+    def test_recommend_transfers1 (self):
+        user_team_list = [201, 350, 495, 311, 255, 99, 491, 19, 58, 351, 148, 109, 17, 309, 116]
+        budget = 3 #0.3 million
+        diff_exp_points = recommend_transfers(user_team_list, budget)
+        self.assertEqual(sum(diff_exp_points)>0, True)
+
+    def test_recommend_transfers2 (self):
+        user_team_list = [47, 326, 255, 18, 395, 328, 99, 346, 4, 252, 351, 488, 44, 320, 54]
+        budget = 2 
+        diff_exp_points = recommend_transfers(user_team_list, budget)
+        self.assertEqual(sum(diff_exp_points)>0, True)
+    
+    def test_recommend_transfers3 (self):
+        user_team_list = [15, 3, 350, 498, 368, 182, 23, 327, 19, 351, 447, 185, 129, 163, 219]
+        budget = 2
+        diff_exp_points = recommend_transfers(user_team_list, budget)
+        self.assertEqual(sum(diff_exp_points)>0, True)
+
+
+
+
+if __name__ == '__main__':
+    unittest.main()
