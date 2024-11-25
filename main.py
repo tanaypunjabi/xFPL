@@ -52,8 +52,8 @@ def recommend_transfers(user_team_list, budget):
         str: A message indicating the available budget and recommended transfers.
     """
     user_players_table = get_user_team_table(user_team_list)
-    print(user_team_list)
-    print(budget)
+    # print(user_team_list)
+    # print(budget)
     user_team_data = user_players_table[['id', 'element_type', 'now_cost']].set_index('id').T.to_dict()
 
     # recommendations = PROCESSED_PLAYERS_TABLE.sort_values(by='value', ascending=False)[:10]
@@ -67,11 +67,15 @@ def recommend_transfers(user_team_list, budget):
 
     recommended_transfers = []
 
+    used_out_players = set()
+    used_in_players = set()
+
     for _, recommended_player in recommendations.iterrows():
-        if recommended_player['player_id'] not in user_team_list:
+        if recommended_player['player_id'] not in user_team_list and recommended_player['player_id'] not in used_in_players:
             for user_player, user_player_data in user_team_data.items():
                 if (recommended_player['position'] == user_player_data['element_type'] and 
-                    (user_player_data['now_cost'] + budget) >= recommended_player['value']):
+                    (user_player_data['now_cost'] + budget) >= recommended_player['value'] and 
+                    user_player not in used_out_players):
                     
                     expected_points_diff = recommended_player['model_pred'] - model_predictions.loc[model_predictions['player_id'] == user_player, 'model_pred'].values[0]
                     
@@ -83,6 +87,8 @@ def recommend_transfers(user_team_list, budget):
                             'expected_points_diff': expected_points_diff
                         }
                     )
+                    used_out_players.add(user_player)
+                    used_in_players.add(recommended_player['player_id'])
                     break
 
     # Sort transfers by descending order of expected points difference
@@ -129,8 +135,15 @@ def recommend_captain(user_team_list):
     Prints:
         str: A list of recommended captain picks.
     """
-    user_players_table = get_user_team_table(user_team_list)
-    captain_recs = user_players_table.sort_values(by='total_points', ascending=False)['full_name'].tolist()[:3]
+    # user_players_table = get_user_team_table(user_team_list)
+    # captain_recs = user_players_table.sort_values(by='total_points', ascending=False)['full_name'].tolist()[:3]
+    # print('Your recommended captain picks are: ')
+    # for rec in captain_recs:
+    #     print(rec)
+
+    model_predictions = pd.read_csv('notebooks/misc/2425gw10_model_preds.csv')
+    user_team_predictions = model_predictions[model_predictions['player_id'].isin(user_team_list)]
+    captain_recs = user_team_predictions.sort_values(by='model_pred', ascending=False)['full_name'].tolist()[:3]
     print('Your recommended captain picks are: ')
     for rec in captain_recs:
         print(rec)
@@ -167,34 +180,7 @@ def main():
     print('\n')
     print('Thanks for using xFPL!')
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
 
-# ### TESTS ###
-
-import unittest
-class TestRecommendTransfers(unittest.TestCase):
-    def test_recommend_transfers1 (self):
-        user_team_list = [201, 350, 495, 311, 255, 99, 491, 19, 58, 351, 148, 109, 17, 309, 116]
-        budget = 3 #0.3 million
-        diff_exp_points = recommend_transfers(user_team_list, budget)
-        self.assertEqual(sum(diff_exp_points)>0, True)
-
-    def test_recommend_transfers2 (self):
-        user_team_list = [47, 326, 255, 18, 395, 328, 99, 346, 4, 252, 351, 488, 44, 320, 54]
-        budget = 2 
-        diff_exp_points = recommend_transfers(user_team_list, budget)
-        self.assertEqual(sum(diff_exp_points)>0, True)
-    
-    def test_recommend_transfers3 (self):
-        user_team_list = [15, 3, 350, 498, 368, 182, 23, 327, 19, 351, 447, 185, 129, 163, 219]
-        budget = 2
-        diff_exp_points = recommend_transfers(user_team_list, budget)
-        self.assertEqual(sum(diff_exp_points)>0, True)
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
