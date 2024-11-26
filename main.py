@@ -17,7 +17,7 @@ def get_user_team(team_id):
             - list: A list of player IDs in the user's team.
             - int: The current budget available for transfers.
     """
-    fpl_api_endpoint = f'https://fantasy.premierleague.com/api/entry/{team_id}/event/8/picks/'
+    fpl_api_endpoint = f'https://fantasy.premierleague.com/api/entry/{team_id}/event/10/picks/'
     response = requests.get(fpl_api_endpoint)
     data = response.json()
     team_id_list = [pick['element'] for pick in data['picks']]
@@ -182,5 +182,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

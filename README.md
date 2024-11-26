@@ -1,11 +1,17 @@
 <!-- # DL_xFPL_tp275_zh94 -->
 # xFPL: Automated Fantasy Premier League (FPL) Strategic Advisor
 
-## DEMO SCRIPT (for first demo)
+<!-- ## DEMO SCRIPT (for first demo)
 - Tanay will demonstrate how we processed our data, and explain the recommendation logic
 - Anthony will demonstrate how the data is imported, and how our interactive user interface works
 - The demo will involve going through ```notebooks/01-data-preprocessing.ipynb``` and ```notebooks/demo1.ipynb```, as well as ```main.py```
-- The TA should be able to run ```main.py```, and upon entering a valid FPL team ID (anything from 1 to 999999 are generally valid, each representing a different team), see different recommendations for each team. (The script will exit with a custom error message for invalid team IDs)
+- The TA should be able to run ```main.py```, and upon entering a valid FPL team ID (anything from 1 to 999999 are generally valid, each representing a different team), see different recommendations for each team. (The script will exit with a custom error message for invalid team IDs) -->
+
+## DEMO SCRIPT (for second demo)
+- Anthony will go over the processes of feature engineering, feature selection, and model training and deployment
+- Tanay will go over the refreshed recommendation algorithm as well as the testing procedures
+- The demo will involve going through parts ```notebooks/03-feature-engineering.ipynb```, ```notebooks/04-feature-selection.ipynb```, ```notebooks/05-model-training.ipynb```, ```main.py``` and ```test.py```
+- The TA should be able to run ```main.py```, and upon entering a valid FPL team ID (anything from 1 to 999999 are generally valid, each representing a different team), see different recommendations for each team. And the recommendations will be more optimised than those from the first demo, as both our recommendation algorithm and the data that we run it on are improved.
 
 ## Project Overview
 
